@@ -1,15 +1,32 @@
 package com.udacity.gamedev.icicles;
 
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
+
 /**
  * Created by mkemp on 2/26/18.
  */
 
 public class Icicle {
 
-    // TODO : Hold current Position
+    private Vector2 position;
 
-    // TODO : Set position with constructor
+    public Icicle() {
+        // TODO : Randomize position
+        position = new Vector2(120, 150);
+    }
 
-    // TODO : Draw icicle with renderer
+    public void render(ShapeRenderer renderer) {
+        renderer.setColor(Constants.ICICLE_COLOR);
+
+        float icicleWidth = Constants.ICICLE_WIDTH;
+        float icicleHeight = Constants.ICICLE_HEIGHT;
+
+        renderer.triangle(
+                position.x, position.y,
+                position.x + icicleWidth, position.y,
+                position.x + icicleWidth / 2, position.y - icicleHeight);
+
+    }
 
 }

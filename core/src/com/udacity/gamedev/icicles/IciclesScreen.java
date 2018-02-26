@@ -14,11 +14,13 @@ public class IciclesScreen implements Screen {
 
     private ShapeRenderer renderer;
     private ExtendViewport viewport;
+    private Icicle icicle;
 
     @Override
     public void show() {
         renderer = new ShapeRenderer();
-        viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        viewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
+        icicle = new Icicle();
     }
 
     @Override
@@ -28,13 +30,14 @@ public class IciclesScreen implements Screen {
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.begin(ShapeRenderer.ShapeType.Filled);
-        renderer.triangle(50, 20, 70, 30, 50, 40);
+//        renderer.triangle(50, 20, 70, 30, 50, 40);
+        icicle.render(renderer);
         renderer.end();
     }
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        viewport.update(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
     }
 
     @Override
