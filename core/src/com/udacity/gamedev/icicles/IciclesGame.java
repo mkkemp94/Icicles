@@ -6,6 +6,6 @@ public class IciclesGame extends Game {
 	
 	@Override
 	public void create () {
-		// TODO : Create screen
+		setScreen(new IciclesScreen());
 	}
 }
