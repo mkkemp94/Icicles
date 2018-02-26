@@ -5,4 +5,11 @@ package com.udacity.gamedev.icicles;
  */
 
 public class Icicle {
+
+    // TODO : Hold current Position
+
+    // TODO : Set position with constructor
+
+    // TODO : Draw icicle with renderer
+
 }
