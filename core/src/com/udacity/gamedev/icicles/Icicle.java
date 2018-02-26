@@ -9,24 +9,27 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Icicle {
 
+    public static final String TAG = Icicle.class.getName();
+
     private Vector2 position;
 
-    public Icicle(Vector2 startPos) {
+    public Icicle(Vector2 position) {
         // TODO : Randomize position
-//        position = new Vector2(120, 150);
-        position = startPos;
+        this.position = position;
     }
 
     public void render(ShapeRenderer renderer) {
+
         renderer.setColor(Constants.ICICLE_COLOR);
+        renderer.set(ShapeRenderer.ShapeType.Filled);
 
         float icicleWidth = Constants.ICICLE_WIDTH;
         float icicleHeight = Constants.ICICLE_HEIGHT;
 
         renderer.triangle(
-                position.x, position.y,
-                position.x + icicleWidth, position.y,
-                position.x + icicleWidth / 2, position.y - icicleHeight);
+                position.x, position.y, // point
+                position.x - icicleWidth / 2, position.y + icicleHeight, // upper left
+                position.x + icicleWidth / 2, position.y + icicleHeight); // upper right
 
     }
 

@@ -8,11 +8,11 @@ import com.badlogic.gdx.graphics.Color;
 
 public class Constants {
 
-    public static final int WORLD_SIZE = 500;
+    public static final float WORLD_SIZE = 10.0f;
 
     public static final Color BACKGROUND_COLOR = Color.BLUE;
     public static final Color ICICLE_COLOR = Color.WHITE;
 
-    public static final float ICICLE_HEIGHT = 50;
-    public static final float ICICLE_WIDTH = 30;
+    public static final float ICICLE_HEIGHT = 1.0f;
+    public static final float ICICLE_WIDTH = 0.5f;
 }
