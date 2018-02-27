@@ -2,6 +2,7 @@ package com.udacity.gamedev.icicles;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
  * Created by mkemp on 2/26/18.
@@ -9,50 +10,56 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Player {
 
-    private Vector2 position;
+    public static final String TAG = Player.class.getName();
 
-    public Player(Vector2 position) {
-        this.position = position;
+    private Vector2 position;
+    private Viewport viewport;
+
+    public Player(Viewport viewport) {
+        this.viewport = viewport;
+        init();
+    }
+
+    public void init() {
+        position = new Vector2(viewport.getWorldWidth() / 2, Constants.PLAYER_HEAD_HEIGHT);
     }
 
     public void render(ShapeRenderer renderer) {
         renderer.setColor(Constants.PLAYER_BODY_COLOR);
-        renderer.set(ShapeRenderer.ShapeType.Line);
+        renderer.set(ShapeRenderer.ShapeType.Filled);
 
         float headRadius = Constants.PLAYER_HEAD_RADIUS;
-        float bodyHeight = Constants.PLAYER_BODY_HEIGHT;
-        float limbLength = Constants.PLAYER_LIMB_LENGTH;
+        float limbWidth = Constants.PLAYER_LIMB_WIDTH;
 
-        renderer.circle(position.x, position.y, headRadius, 100);
-        renderer.line(
-                position.x,
-                position.y - headRadius,
-                position.x,
-                position.y - headRadius - bodyHeight
+        renderer.circle(position.x, position.y, headRadius, Constants.PLAYER_HEAD_SEGMENTS);
+
+        Vector2 torsoTop = new Vector2(position.x, position.y - headRadius);
+        Vector2 torsoBottom = new Vector2(torsoTop.x, torsoTop.y - 2 * headRadius);
+
+        renderer.rectLine(torsoTop, torsoBottom, limbWidth);
+
+        renderer.rectLine(
+                torsoTop.x, torsoTop.y,
+                torsoTop.x + headRadius, torsoTop.y - headRadius,
+                limbWidth
         );
-        renderer.line(
-                position.x,
-                position.y - headRadius - bodyHeight * 0.2f,
-                position.x - limbLength,
-                position.y - headRadius - bodyHeight * 0.2f - limbLength
+
+        renderer.rectLine(
+                torsoTop.x, torsoTop.y,
+                torsoTop.x - headRadius, torsoTop.y - headRadius,
+                limbWidth
         );
-        renderer.line(
-                position.x,
-                position.y - headRadius - bodyHeight * 0.2f,
-                position.x + limbLength,
-                position.y - headRadius - bodyHeight * 0.2f - limbLength
+
+        renderer.rectLine(
+                torsoBottom.x, torsoBottom.y,
+                torsoBottom.x + headRadius, torsoBottom.y - headRadius,
+                limbWidth
         );
-        renderer.line(
-                position.x,
-                position.y - headRadius - bodyHeight,
-                position.x - limbLength,
-                position.y - headRadius - bodyHeight - limbLength
-        );
-        renderer.line(
-                position.x,
-                position.y - headRadius - bodyHeight,
-                position.x + limbLength,
-                position.y - headRadius - bodyHeight - limbLength
+
+        renderer.rectLine(
+                torsoBottom.x, torsoBottom.y,
+                torsoBottom.x - headRadius, torsoBottom.y - headRadius,
+                limbWidth
         );
     }
 }

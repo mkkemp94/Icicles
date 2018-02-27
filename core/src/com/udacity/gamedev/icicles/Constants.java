@@ -17,7 +17,8 @@ public class Constants {
     public static final float ICICLE_HEIGHT = 1.0f;
     public static final float ICICLE_WIDTH = 0.5f;
 
-    public static final float PLAYER_HEAD_RADIUS = 0.4f;
-    public static final float PLAYER_BODY_HEIGHT = 0.8f;
-    public static final float PLAYER_LIMB_LENGTH = 0.4f;
+    public static final int PLAYER_HEAD_SEGMENTS = 20;
+    public static final float PLAYER_HEAD_RADIUS = 0.5f;
+    public static final float PLAYER_HEAD_HEIGHT = 4.0f * PLAYER_HEAD_RADIUS; // height off ground
+    public static final float PLAYER_LIMB_WIDTH = 0.1f;
 }
