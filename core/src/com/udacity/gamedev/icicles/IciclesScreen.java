@@ -19,6 +19,7 @@ public class IciclesScreen implements Screen {
     private ShapeRenderer renderer;
     private ExtendViewport viewport;
     private Icicle icicle;
+    private Player player;
 
     @Override
     public void show() {
@@ -26,6 +27,7 @@ public class IciclesScreen implements Screen {
         renderer.setAutoShapeType(true);
         viewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
         icicle = new Icicle(new Vector2(Constants.WORLD_SIZE / 2, Constants.WORLD_SIZE / 2));
+        player = new Player(new Vector2(Constants.WORLD_SIZE / 2, Constants.WORLD_SIZE / 6));
     }
 
     @Override
@@ -40,6 +42,7 @@ public class IciclesScreen implements Screen {
 
         renderer.begin(ShapeRenderer.ShapeType.Filled);
         icicle.render(renderer);
+        player.render(renderer);
         renderer.end();
     }
 
