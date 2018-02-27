@@ -15,7 +15,6 @@ public class Player {
     public static final String TAG = Player.class.getName();
 
     private Vector2 position;
-    private Vector2 velocity;
     private Viewport viewport;
 
     public Player(Viewport viewport) {
@@ -25,27 +24,20 @@ public class Player {
 
     public void init() {
         position = new Vector2(viewport.getWorldWidth() / 2, Constants.PLAYER_HEAD_HEIGHT);
-        velocity = new Vector2();
     }
 
-    public void render(float delta, ShapeRenderer renderer) {
-        checkForInput(delta);
+    public void render(ShapeRenderer renderer) {
         renderBody(renderer);
     }
 
-    private void checkForInput(float delta) {
+    public void update(float delta) {
 
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            velocity.x = Constants.PLAYER_MOVEMENT;
+            position.x += delta * Constants.PLAYER_MOVEMENT;
         }
         else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            velocity.x = -Constants.PLAYER_MOVEMENT;
+            position.x -= delta * Constants.PLAYER_MOVEMENT;
         }
-        else {
-            velocity.x = 0;
-        }
-
-        position.x += delta * velocity.x;
 
         collideWithWalls();
     }
@@ -54,10 +46,8 @@ public class Player {
         float headRadius = Constants.PLAYER_HEAD_RADIUS;
         if (position.x - headRadius < 0) {
             position.x = headRadius;
-            velocity.x = 0;
         } else if (position.x + headRadius > viewport.getWorldWidth()) {
             position.x = viewport.getWorldWidth() - headRadius;
-            velocity.x = 0;
         }
     }
 

@@ -34,6 +34,8 @@ public class IciclesScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        player.update(delta);
+
         viewport.apply(true);
 
         Color bgColor = Constants.BACKGROUND_COLOR;
@@ -44,7 +46,7 @@ public class IciclesScreen implements Screen {
 
         renderer.begin(ShapeRenderer.ShapeType.Filled);
         icicle.render(renderer);
-        player.render(delta, renderer);
+        player.render(renderer);
         renderer.end();
     }
 
