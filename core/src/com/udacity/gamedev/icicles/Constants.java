@@ -21,4 +21,6 @@ public class Constants {
     public static final float PLAYER_HEAD_RADIUS = 0.5f;
     public static final float PLAYER_HEAD_HEIGHT = 4.0f * PLAYER_HEAD_RADIUS; // height off ground
     public static final float PLAYER_LIMB_WIDTH = 0.1f;
+
+    public static final float PLAYER_MOVEMENT = 10.0f;
 }

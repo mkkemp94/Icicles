@@ -44,7 +44,7 @@ public class IciclesScreen implements Screen {
 
         renderer.begin(ShapeRenderer.ShapeType.Filled);
         icicle.render(renderer);
-        player.render(renderer);
+        player.render(delta, renderer);
         renderer.end();
     }
 
