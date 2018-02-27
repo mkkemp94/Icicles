@@ -39,6 +39,9 @@ public class Player {
             position.x -= delta * Constants.PLAYER_MOVEMENT;
         }
 
+        float accelerometerInput = Gdx.input.getAccelerometerY() / (Constants.GRAVITATIONAL_ACCELERATION * Constants.ACCELEROMETER_SENSITIVITY);
+        position.x += delta * accelerometerInput * Constants.PLAYER_MOVEMENT;
+
         collideWithWalls();
     }
 
