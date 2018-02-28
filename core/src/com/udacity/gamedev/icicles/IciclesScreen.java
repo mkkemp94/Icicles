@@ -17,7 +17,6 @@ public class IciclesScreen implements Screen {
 
     private ShapeRenderer renderer;
     private ExtendViewport viewport;
-    private Icicle icicle;
     private Player player;
     private Icicles icicles;
 
@@ -28,12 +27,6 @@ public class IciclesScreen implements Screen {
         renderer = new ShapeRenderer();
         renderer.setAutoShapeType(true);
 
-        icicle = new Icicle(viewport
-//                new Vector2(
-//                Constants.WORLD_SIZE / 2,
-//                viewport.getWorldHeight() + Constants.ICICLE_HEIGHT * 3 //Constants.WORLD_SIZE / 2
-//        )
-        );
         player = new Player(viewport);
         icicles = new Icicles(viewport);
     }
@@ -41,7 +34,6 @@ public class IciclesScreen implements Screen {
     @Override
     public void render(float delta) {
         player.update(delta);
-        icicle.update(delta);
         icicles.update(delta);
 
         viewport.apply(true);
@@ -53,7 +45,6 @@ public class IciclesScreen implements Screen {
         renderer.setProjectionMatrix(viewport.getCamera().combined);
 
         renderer.begin(ShapeRenderer.ShapeType.Filled);
-        icicle.render(renderer);
         player.render(renderer);
         icicles.render(renderer);
         renderer.end();
@@ -63,7 +54,6 @@ public class IciclesScreen implements Screen {
     public void resize(int width, int height) {
         viewport.update(width, height, true);
         player.init();
-        icicle.init();
     }
 
     @Override
