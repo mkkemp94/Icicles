@@ -16,9 +16,11 @@ public class Player {
 
     private Vector2 position;
     private Viewport viewport;
+    public int numDeaths;
 
     public Player(Viewport viewport) {
         this.viewport = viewport;
+        numDeaths = 0;
         init();
     }
 
@@ -30,20 +32,10 @@ public class Player {
         boolean hitByIcicle = false;
 
         for (Icicle icicle : icicles.icicleArray) {
-
-//            float center_x = position.x;
-//            float center_y = position.y;
-//            float radius = Constants.PLAYER_HEAD_RADIUS;
-//            float point_x = icicle.position.x;
-//            float point_y = icicle.position.y;
-//
-//            if (radius >= Math.sqrt(
-//                  Math.abs(point_x - center_x) * Math.abs(point_x - center_x) +
-//                  Math.abs(point_y - center_y) * Math.abs(point_y - center_y)
-//            )) hitByIcicle = true;
-
-            if (icicle.position.dst(position) < Constants.PLAYER_HEAD_RADIUS) hitByIcicle = true;
-
+            if (icicle.position.dst(position) < Constants.PLAYER_HEAD_RADIUS) {
+                numDeaths++;
+                hitByIcicle = true;
+            }
         }
 
         return hitByIcicle;

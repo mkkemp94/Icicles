@@ -30,4 +30,7 @@ public class Constants {
 
     public static final float SPAWNS_PER_SECOND = 5f;
     public static final Vector2 ICICLE_ACCELERATION = new Vector2(0, -5.0f);
+
+    public static final float HUD_SCREEN_REFERENCE_SIZE = 480;
+    public static final float HUD_MARGIN = 20.0f;
 }

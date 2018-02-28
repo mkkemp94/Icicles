@@ -16,6 +16,7 @@ public class Icicles {
 
     DelayedRemovalArray<Icicle> icicleArray;
     private ExtendViewport viewport;
+    public int iciclesDodged;
 
     public Icicles(ExtendViewport viewport) {
         this.viewport = viewport;
@@ -24,6 +25,7 @@ public class Icicles {
 
     public void init() {
         icicleArray = new DelayedRemovalArray<Icicle>(false, 100);
+        iciclesDodged = 0;
     }
 
     public void update(float delta) {
@@ -43,6 +45,7 @@ public class Icicles {
 
         for (int i = 0; i < icicleArray.size; i++) {
             if (icicleArray.get(i).position.y < -Constants.ICICLE_HEIGHT) {
+                iciclesDodged++;
                 icicleArray.removeIndex(i);
             }
         }

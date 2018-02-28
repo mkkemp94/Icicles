@@ -4,8 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 /**
  * Created by mkemp on 2/26/18.
@@ -16,19 +21,33 @@ public class IciclesScreen implements Screen {
     public static final String TAG = IciclesScreen.class.getName();
 
     private ShapeRenderer renderer;
-    private ExtendViewport viewport;
+    private SpriteBatch spriteBatch;
+    private BitmapFont font;
+
+    private ExtendViewport gameViewport;
+    private ScreenViewport hudViewport;
+
     private Player player;
     private Icicles icicles;
 
+    private int topScore;
+
     @Override
     public void show() {
-        viewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
+        gameViewport = new ExtendViewport(Constants.WORLD_SIZE, Constants.WORLD_SIZE);
+        hudViewport = new ScreenViewport();
+
+        spriteBatch = new SpriteBatch();
+        font = new BitmapFont();
+        font.getRegion().getTexture().setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 
         renderer = new ShapeRenderer();
         renderer.setAutoShapeType(true);
 
-        player = new Player(viewport);
-        icicles = new Icicles(viewport);
+        player = new Player(gameViewport);
+        icicles = new Icicles(gameViewport);
+
+        topScore = 0;
     }
 
     @Override
@@ -40,23 +59,46 @@ public class IciclesScreen implements Screen {
             icicles.init();
         }
 
-        viewport.apply(true);
+        gameViewport.apply(true);
 
         Color bgColor = Constants.BACKGROUND_COLOR;
         Gdx.gl.glClearColor(bgColor.r, bgColor.g, bgColor.b, 1);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        renderer.setProjectionMatrix(viewport.getCamera().combined);
+        renderer.setProjectionMatrix(gameViewport.getCamera().combined);
 
         renderer.begin(ShapeRenderer.ShapeType.Filled);
         player.render(renderer);
         icicles.render(renderer);
         renderer.end();
+
+        topScore = Math.max(topScore, icicles.iciclesDodged);
+
+        hudViewport.apply();
+
+        spriteBatch.setProjectionMatrix(hudViewport.getCamera().combined);
+
+        spriteBatch.begin();
+        font.draw(spriteBatch,
+                "Deaths: " + player.numDeaths,
+                Constants.HUD_MARGIN,
+                hudViewport.getWorldHeight() - Constants.HUD_MARGIN
+        );
+        font.draw(spriteBatch,
+                "Score: " + icicles.iciclesDodged + "\n" +
+                "Top Score: " + topScore,
+                hudViewport.getWorldWidth() - Constants.HUD_MARGIN,
+                hudViewport.getWorldHeight() - Constants.HUD_MARGIN,
+                0, Align.right, false
+        );
+        spriteBatch.end();
     }
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height, true);
+        gameViewport.update(width, height, true);
+        hudViewport.update(width, height, true);
+        font.getData().setScale(Math.min(width, height) / Constants.HUD_SCREEN_REFERENCE_SIZE);
         player.init();
         icicles.init();
     }
@@ -79,5 +121,7 @@ public class IciclesScreen implements Screen {
     @Override
     public void dispose() {
         renderer.dispose();
+        spriteBatch.dispose();
+        font.dispose();
     }
 }
