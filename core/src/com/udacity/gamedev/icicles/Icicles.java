@@ -3,7 +3,7 @@ package com.udacity.gamedev.icicles;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 
 /**
@@ -14,7 +14,7 @@ public class Icicles {
 
     public static final String TAG = Icicles.class.getName();
 
-    private Array<Icicle> icicleArray;
+    private DelayedRemovalArray<Icicle> icicleArray;
     private ExtendViewport viewport;
 
     public Icicles(ExtendViewport viewport) {
@@ -23,7 +23,7 @@ public class Icicles {
     }
 
     public void init() {
-        icicleArray = new Array<Icicle>(false, 100);
+        icicleArray = new DelayedRemovalArray<Icicle>(false, 100);
     }
 
     public void update(float delta) {
@@ -38,6 +38,16 @@ public class Icicles {
         for (Icicle icicle : icicleArray) {
             icicle.update(delta);
         }
+
+        icicleArray.begin();
+
+        for (int i = 0; i < icicleArray.size; i++) {
+            if (icicleArray.get(i).position.y < -Constants.ICICLE_HEIGHT) {
+                icicleArray.removeIndex(i);
+            }
+        }
+
+        icicleArray.end();
     }
 
     public void render(ShapeRenderer renderer) {
