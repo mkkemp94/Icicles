@@ -1,6 +1,7 @@
 package com.udacity.gamedev.icicles;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * Created by mkemp on 2/26/18.
@@ -28,4 +29,5 @@ public class Constants {
     public static final float GRAVITATIONAL_ACCELERATION = 9.8f;
 
     public static final float SPAWNS_PER_SECOND = 5f;
+    public static final Vector2 ICICLE_ACCELERATION = new Vector2(0, -5.0f);
 }

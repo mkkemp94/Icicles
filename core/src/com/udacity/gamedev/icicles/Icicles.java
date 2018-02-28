@@ -1,11 +1,10 @@
 package com.udacity.gamedev.icicles;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-
-import java.util.Random;
 
 /**
  * Created by mkemp on 2/26/18.
@@ -20,17 +19,19 @@ public class Icicles {
 
     public Icicles(ExtendViewport viewport) {
         this.viewport = viewport;
-        icicleArray = new Array<Icicle>();
+        init();
+    }
+
+    public void init() {
+        icicleArray = new Array<Icicle>(false, 100);
     }
 
     public void update(float delta) {
-        Random randomSpawn = new Random();
-        Random randomPosition = new Random();
 
-        if (randomSpawn.nextFloat() < delta * Constants.SPAWNS_PER_SECOND) {
+        if (MathUtils.random() < delta * Constants.SPAWNS_PER_SECOND) {
             icicleArray.add(new Icicle(new Vector2(
-                    randomPosition.nextFloat() * viewport.getWorldWidth(),
-                    viewport.getWorldHeight() + Constants.ICICLE_HEIGHT
+                    MathUtils.random() * viewport.getWorldWidth(),
+                    viewport.getWorldHeight()
             )));
         }
 
@@ -40,6 +41,7 @@ public class Icicles {
     }
 
     public void render(ShapeRenderer renderer) {
+        renderer.setColor(Constants.ICICLE_COLOR);
         for (Icicle icicle : icicleArray) {
             icicle.render(renderer);
         }

@@ -12,13 +12,16 @@ public class Icicle {
     public static final String TAG = Icicle.class.getName();
 
     private Vector2 position;
+    private Vector2 velocity;
 
     public Icicle(Vector2 position) {
         this.position = position;
+        this.velocity = new Vector2();
     }
 
     public void update(float delta) {
-        position.y -= delta * Constants.GRAVITATIONAL_ACCELERATION * Constants.ACCELEROMETER_SENSITIVITY;
+        velocity.mulAdd(Constants.ICICLE_ACCELERATION, delta);
+        position.mulAdd(velocity, delta);
     }
 
     public void render(ShapeRenderer renderer) {
@@ -32,7 +35,8 @@ public class Icicle {
         renderer.triangle(
                 position.x, position.y, // point
                 position.x - icicleWidth / 2, position.y + icicleHeight, // upper left
-                position.x + icicleWidth / 2, position.y + icicleHeight); // upper right
+                position.x + icicleWidth / 2, position.y + icicleHeight  // upper right
+        );
 
     }
 
