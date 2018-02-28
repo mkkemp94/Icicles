@@ -26,6 +26,29 @@ public class Player {
         position = new Vector2(viewport.getWorldWidth() / 2, Constants.PLAYER_HEAD_HEIGHT);
     }
 
+    public boolean hitByIcicle(Icicles icicles) {
+        boolean hitByIcicle = false;
+
+        for (Icicle icicle : icicles.icicleArray) {
+
+//            float center_x = position.x;
+//            float center_y = position.y;
+//            float radius = Constants.PLAYER_HEAD_RADIUS;
+//            float point_x = icicle.position.x;
+//            float point_y = icicle.position.y;
+//
+//            if (radius >= Math.sqrt(
+//                  Math.abs(point_x - center_x) * Math.abs(point_x - center_x) +
+//                  Math.abs(point_y - center_y) * Math.abs(point_y - center_y)
+//            )) hitByIcicle = true;
+
+            if (icicle.position.dst(position) < Constants.PLAYER_HEAD_RADIUS) hitByIcicle = true;
+
+        }
+
+        return hitByIcicle;
+    }
+
     public void render(ShapeRenderer renderer) {
         renderBody(renderer);
     }

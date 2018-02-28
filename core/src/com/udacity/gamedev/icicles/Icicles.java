@@ -14,7 +14,7 @@ public class Icicles {
 
     public static final String TAG = Icicles.class.getName();
 
-    private DelayedRemovalArray<Icicle> icicleArray;
+    DelayedRemovalArray<Icicle> icicleArray;
     private ExtendViewport viewport;
 
     public Icicles(ExtendViewport viewport) {

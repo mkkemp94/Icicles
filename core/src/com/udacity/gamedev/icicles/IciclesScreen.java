@@ -36,6 +36,10 @@ public class IciclesScreen implements Screen {
         player.update(delta);
         icicles.update(delta);
 
+        if (player.hitByIcicle(icicles)) {
+            icicles.init();
+        }
+
         viewport.apply(true);
 
         Color bgColor = Constants.BACKGROUND_COLOR;
