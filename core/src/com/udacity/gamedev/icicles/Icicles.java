@@ -14,11 +14,14 @@ public class Icicles {
 
     public static final String TAG = Icicles.class.getName();
 
+    Constants.Difficulty difficulty;
+
     DelayedRemovalArray<Icicle> icicleArray;
     private ExtendViewport viewport;
     public int iciclesDodged;
 
-    public Icicles(ExtendViewport viewport) {
+    public Icicles(ExtendViewport viewport, Constants.Difficulty difficulty) {
+        this.difficulty = difficulty;
         this.viewport = viewport;
         init();
     }
@@ -30,7 +33,7 @@ public class Icicles {
 
     public void update(float delta) {
 
-        if (MathUtils.random() < delta * Constants.SPAWNS_PER_SECOND) {
+        if (MathUtils.random() < delta * difficulty.spawnRate) {
             icicleArray.add(new Icicle(new Vector2(
                     MathUtils.random() * viewport.getWorldWidth(),
                     viewport.getWorldHeight()

@@ -33,4 +33,27 @@ public class Constants {
 
     public static final float HUD_SCREEN_REFERENCE_SIZE = 480;
     public static final float HUD_MARGIN = 20.0f;
+
+    public static final String LABEL_COLD = "Cold";
+    public static final String LABEL_COLDER = "Colder";
+    public static final String LABEL_COLDEST = "Coldest";
+
+    public static final float SPAWN_RATE_COLD = 5f;
+    public static final float SPAWN_RATE_COLDER = 10f;
+    public static final float SPAWN_RATE_COLDEST = 15f;
+
+    public enum Difficulty {
+        EASY(SPAWN_RATE_COLD, LABEL_COLD),
+        MEDIUM(SPAWN_RATE_COLDER, LABEL_COLDER),
+        HARD(SPAWN_RATE_COLDEST, LABEL_COLDEST);
+
+        float spawnRate;
+        String label;
+
+        Difficulty(float spawnRate, String label) {
+            this.spawnRate = spawnRate;
+            this.label = label;
+        }
+
+    }
 }

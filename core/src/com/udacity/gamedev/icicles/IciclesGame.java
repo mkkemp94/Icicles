@@ -6,6 +6,7 @@ public class IciclesGame extends Game {
 	
 	@Override
 	public void create () {
-		setScreen(new IciclesScreen());
+		Constants.Difficulty difficulty = Constants.Difficulty.HARD;
+		setScreen(new IciclesScreen(difficulty));
 	}
 }

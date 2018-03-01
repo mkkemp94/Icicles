@@ -20,6 +20,8 @@ public class IciclesScreen implements Screen {
 
     public static final String TAG = IciclesScreen.class.getName();
 
+    Constants.Difficulty difficulty;
+
     private ShapeRenderer renderer;
     private SpriteBatch spriteBatch;
     private BitmapFont font;
@@ -31,6 +33,10 @@ public class IciclesScreen implements Screen {
     private Icicles icicles;
 
     private int topScore;
+
+    public IciclesScreen(Constants.Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
 
     @Override
     public void show() {
@@ -45,7 +51,7 @@ public class IciclesScreen implements Screen {
         renderer.setAutoShapeType(true);
 
         player = new Player(gameViewport);
-        icicles = new Icicles(gameViewport);
+        icicles = new Icicles(gameViewport, difficulty);
 
         topScore = 0;
     }
@@ -80,6 +86,7 @@ public class IciclesScreen implements Screen {
 
         spriteBatch.begin();
         font.draw(spriteBatch,
+                "Difficulty: " + difficulty.label + "\n" +
                 "Deaths: " + player.numDeaths,
                 Constants.HUD_MARGIN,
                 hudViewport.getWorldHeight() - Constants.HUD_MARGIN
