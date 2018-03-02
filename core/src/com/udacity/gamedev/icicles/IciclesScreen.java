@@ -1,6 +1,7 @@
 package com.udacity.gamedev.icicles;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -16,11 +17,13 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
  * Created by mkemp on 2/26/18.
  */
 
-public class IciclesScreen implements Screen {
+public class IciclesScreen extends InputAdapter implements Screen {
 
     public static final String TAG = IciclesScreen.class.getName();
 
     Constants.Difficulty difficulty;
+
+    private  IciclesGame game;
 
     private ShapeRenderer renderer;
     private SpriteBatch spriteBatch;
@@ -34,7 +37,8 @@ public class IciclesScreen implements Screen {
 
     private int topScore;
 
-    public IciclesScreen(Constants.Difficulty difficulty) {
+    public IciclesScreen(IciclesGame game, Constants.Difficulty difficulty) {
+        this. game = game;
         this.difficulty = difficulty;
     }
 
@@ -54,6 +58,8 @@ public class IciclesScreen implements Screen {
         icicles = new Icicles(gameViewport, difficulty);
 
         topScore = 0;
+
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override
@@ -130,5 +136,12 @@ public class IciclesScreen implements Screen {
         renderer.dispose();
         spriteBatch.dispose();
         font.dispose();
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+        game.showDifficultyScreen();
+        return true;
     }
 }

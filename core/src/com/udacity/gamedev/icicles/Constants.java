@@ -42,6 +42,23 @@ public class Constants {
     public static final float SPAWN_RATE_COLDER = 10f;
     public static final float SPAWN_RATE_COLDEST = 15f;
 
+    public static Color COLOR_COLD = new Color(0.2f, 0.2f, 1, 1);
+    public static Color COLOR_COLDER = new Color(0.5f, 0.5f, 1, 1);
+    public static Color COLOR_COLDEST = new Color(0.7f, 0.7f, 1, 1);
+
+    public static float DIFFICULTY_WORLD_SIZE = 480.0f;
+    public static float DIFFICULTY_LABEL_SCALE = 1.5f;
+
+    public static final float DIFFICULTY_SELECT_BUTTON_RADIUS = DIFFICULTY_WORLD_SIZE / 9;
+    public static final int DIFFICULTY_SELECT_BUTTON_SEGMENTS = 50;
+
+    public static final Vector2 DIFFICULT_COLD_BUTTON_CENTER =
+            new Vector2(DIFFICULTY_WORLD_SIZE / 4, DIFFICULTY_WORLD_SIZE / 2);
+    public static final Vector2 DIFFICULT_COLDER_BUTTON_CENTER =
+            new Vector2(DIFFICULTY_WORLD_SIZE / 2, DIFFICULTY_WORLD_SIZE / 2);
+    public static final Vector2 DIFFICULT_COLDEST_BUTTON_CENTER =
+            new Vector2(DIFFICULTY_WORLD_SIZE * 3 / 4, DIFFICULTY_WORLD_SIZE / 2);
+
     public enum Difficulty {
         EASY(SPAWN_RATE_COLD, LABEL_COLD),
         MEDIUM(SPAWN_RATE_COLDER, LABEL_COLDER),
